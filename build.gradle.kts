@@ -1,27 +1,16 @@
+tasks.register("clean", Delete::class) {
+    delete(rootProject.buildDir)
+}
+
+tasks.register("JavaCompile", JavaCompile::class) {
+    this.options.encoding = "UTF-8"
+}
+
+allprojects {
+    buildDir = File(rootProject.buildDir, name)
+}
+
 plugins {
-    kotlin("jvm") version "1.8.0"
-    application
-}
-
-group = "org.cloudflare.zhaogege"
-version = "1.0-SNAPSHOT"
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testImplementation(kotlin("test"))
-}
-
-tasks.test {
-    useJUnitPlatform()
-}
-
-kotlin {
-    jvmToolchain(11)
-}
-
-application {
-    mainClass.set("MainKt")
+    id("com.plugin.gradle.total") apply false
+    alias(libs.plugins.gradle.jvm) apply false
 }
