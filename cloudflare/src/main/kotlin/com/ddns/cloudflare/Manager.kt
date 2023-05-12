@@ -12,7 +12,7 @@ class Manager : CoroutineScope {
         launch {
             while (isActive) {
                 val data = ApiManager.api.queryDns(zoneId)
-                info("getData:$data")
+                info("getData get data:${data.result.size}")
                 check(data)
                 delay(1000 * 60 * 10)
             }
@@ -23,7 +23,7 @@ class Manager : CoroutineScope {
         if (data.success) {
             val result = data.result.find { it.name == changeDns }
             val ipResult = ApiManager.api.queryIP()
-            info("api data:$ipResult")
+            info("api data:${ipResult.ip}")
             if (!ipResult.ip.isNullOrEmpty() && ipResult.ip != result?.content && result != null) {
                 info("change ip:${ipResult.ip}")
                 val r = ApiManager.api.updateIP(zoneId, result.id!!, result.copy(content = ipResult.ip))
@@ -32,6 +32,8 @@ class Manager : CoroutineScope {
                 } else {
                     info("change error")
                 }
+            } else {
+                info("needn't change")
             }
         }
     }

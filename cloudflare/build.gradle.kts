@@ -11,6 +11,7 @@ version = "1.0-SNAPSHOT"
 application {
     mainClass.set("com.ddns.cloudflare.Main")
     applicationName = "ddns"
+    mainModule.set("ddns")
 }
 
 dependencies {

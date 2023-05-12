@@ -22,8 +22,6 @@ object ApiManager {
                             .addHeader("Content-Type", "application/json")
                             .build()
                         info("request url:${request.url()}")
-                        info("request method:${request.method()}")
-                        info("request headers:${request.headers().toMultimap().entries.joinToString(",")}")
                         chain.proceed(request)
                     }
                     .build()
