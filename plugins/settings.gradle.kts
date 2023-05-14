@@ -5,6 +5,7 @@ pluginManagement {
     repositories {
         google()
         mavenCentral()
+        maven("https://maven.aliyun.com/repository/spring-plugin")
         gradlePluginPortal()
     }
 }
