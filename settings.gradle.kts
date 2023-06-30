@@ -13,7 +13,7 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
     repositories {
-//        maven { setUrl("https://maven.aliyun.com/repository/public") }
+        maven { setUrl("https://maven.aliyun.com/repository/public") }
         google()
         mavenCentral()
     }

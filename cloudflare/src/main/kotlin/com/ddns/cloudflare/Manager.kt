@@ -11,6 +11,7 @@ class Manager : CoroutineScope {
     init {
         launch {
             while (isActive) {
+                info("start query dns")
                 val data = ApiManager.api.queryDns(zoneId)
                 info("getData get data:${data.result.size}")
                 check(data)
@@ -39,8 +40,8 @@ class Manager : CoroutineScope {
     }
 
     override val coroutineContext: CoroutineContext
-        get() = Dispatchers.IO + CoroutineExceptionHandler { _, throwable ->
-            fail("error")
-            fail(throwable)
+        get() = Dispatchers.IO + CoroutineExceptionHandler { coroutines, throwable ->
+            fail("error:$coroutines", throwable)
+
         }
 }
