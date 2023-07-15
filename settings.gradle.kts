@@ -3,6 +3,7 @@
 pluginManagement {
     includeBuild("plugins")
     repositories {
+        mavenLocal()
         google()
         mavenCentral()
         maven("https://maven.aliyun.com/repository/spring-plugin")
@@ -13,6 +14,7 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
     repositories {
+        mavenLocal()
         maven { setUrl("https://maven.aliyun.com/repository/public") }
         google()
         mavenCentral()

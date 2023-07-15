@@ -3,10 +3,13 @@ package com.ddns.cloudflare
 import com.ddns.cloudflare.api.*
 import com.ddns.cloudflare.data.Response
 import kotlinx.coroutines.*
+import java.util.concurrent.atomic.AtomicLong
 import kotlin.coroutines.CoroutineContext
 
 
 class Manager : CoroutineScope {
+
+    private val atomicLong = AtomicLong(1000 * 60 * 60)
 
     init {
         launch {
@@ -15,7 +18,7 @@ class Manager : CoroutineScope {
                 val data = ApiManager.api.queryDns(zoneId)
                 info("getData get data:${data.result.size}")
                 check(data)
-                delay(1000 * 60 * 10)
+                delay(atomicLong.get())
             }
         }
     }
@@ -30,6 +33,7 @@ class Manager : CoroutineScope {
                 val r = ApiManager.api.updateIP(zoneId, result.id!!, result.copy(content = ipResult.ip))
                 if (r.success) {
                     info("change success")
+                    atomicLong.getAndSet(1000 * 60 * 60)
                 } else {
                     info("change error")
                 }
@@ -37,11 +41,12 @@ class Manager : CoroutineScope {
                 info("needn't change")
             }
         }
+
     }
 
     override val coroutineContext: CoroutineContext
-        get() = Dispatchers.IO + CoroutineExceptionHandler { coroutines, throwable ->
+        get() = Main.coroutineContext + CoroutineExceptionHandler { coroutines, throwable ->
             fail("error:$coroutines", throwable)
-
+            atomicLong.getAndSet(1000 * 60 * 60 * 4)
         }
 }
