@@ -1,6 +1,6 @@
 package com.ddns.cloudflare.api
 
-import com.ddns.cloudflare.data.IP
+import com.ddns.cloudflare.data.IPV1
 import com.ddns.cloudflare.data.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -17,7 +17,7 @@ interface ServiceApi {
     suspend fun queryDns(@Path("zone_identifier") zoneId: String): Response<List<Response.Result>>
 
     @GET
-    suspend fun queryIP(@Url url: String = "https://qifu-api.baidubce.com/ip/local/geo/v1/district"): IP
+    suspend fun queryIP(@Url url: String = "https://www.ipplus360.com/getIP"): IPV1
 
     @PUT("zones/{zone_identifier}/dns_records/{identifier}")
     suspend fun updateIP(

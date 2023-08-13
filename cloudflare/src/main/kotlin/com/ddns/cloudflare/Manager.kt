@@ -27,10 +27,10 @@ class Manager : CoroutineScope {
         if (data.success) {
             val result = data.result.find { it.name == changeDns }
             val ipResult = ApiManager.api.queryIP()
-            info("api data:${ipResult.ip}")
-            if (!ipResult.ip.isNullOrEmpty() && ipResult.ip != result?.content && result != null) {
-                info("change ip:${ipResult.ip}")
-                val r = ApiManager.api.updateIP(zoneId, result.id!!, result.copy(content = ipResult.ip))
+            info("api data:${ipResult.data}")
+            if (!ipResult.data.isNullOrEmpty() && ipResult.data != result?.content && result != null) {
+                info("change ip:${ipResult.data}")
+                val r = ApiManager.api.updateIP(zoneId, result.id!!, result.copy(content = ipResult.data))
                 if (r.success) {
                     info("change success")
                     atomicLong.getAndSet(1000 * 60 * 60)
