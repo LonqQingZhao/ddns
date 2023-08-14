@@ -10,15 +10,21 @@ import kotlin.coroutines.CoroutineContext
 class Manager : CoroutineScope {
 
     private val atomicLong = AtomicLong(1000 * 60 * 60)
+    private val atomicLong1 = AtomicLong(0)
 
     init {
         launch {
             while (isActive) {
-                info("start query dns")
-                val data = ApiManager.api.queryDns(zoneId)
-                info("getData get data:${data.result.size}")
-                check(data)
-                delay(atomicLong.get())
+                val job = async (coroutineContext) {
+                    info("start query dns")
+                    val data = ApiManager.api.queryDns(zoneId)
+                    info("getData get data:${data.result.size}")
+                    check(data)
+                    delay(atomicLong.get())
+                    atomicLong1.getAndUpdate { 0 }
+                }
+                job.await()
+                delay(atomicLong1.get())
             }
         }
     }
@@ -48,5 +54,6 @@ class Manager : CoroutineScope {
         get() = Main.coroutineContext + CoroutineExceptionHandler { coroutines, throwable ->
             fail("error:$coroutines", throwable)
             atomicLong.getAndSet(1000 * 60 * 60 * 4)
+            atomicLong1.getAndSet(500)
         }
 }
