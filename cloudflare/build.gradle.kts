@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.ddns.cloudflare"
-version = "1.0-SNAPSHOT"
+version = "1.1"
 
 application {
     mainClass.set("com.ddns.cloudflare.Main")
@@ -15,8 +15,8 @@ application {
 }
 
 dependencies {
-    implementation(Version.Kotlin.cor)
-    implementation(Version.Kotlin.cor_jvm)
-    implementation(Version.Http.retrofit)
-    implementation(Version.Http.retrofit_gson)
+    implementation(Version.Kotlin.COR)
+    implementation(Version.Kotlin.COR_JVM)
+    implementation(Version.Http.RETROFIT)
+    implementation(Version.Http.RETROFIT_GSON)
 }

@@ -1,20 +1,20 @@
 package com.ddns.cloudflare
 
 import kotlinx.coroutines.*
+import java.util.concurrent.Executors
 import kotlin.coroutines.CoroutineContext
 
 object Main {
 
 
-    lateinit var coroutineContext: CoroutineContext
+    private val coroutineContext: CoroutineContext = Executors.newSingleThreadExecutor().asCoroutineDispatcher()
 
     @JvmStatic
     fun main(args: Array<String>) {
-        runBlocking {
-            Main.coroutineContext = coroutineContext
-            Manager()
+        runBlocking(coroutineContext) {
+            Manager(coroutineContext)
             while (isActive) {
-                delay(500000)
+                delay(1000)
             }
         }
     }

@@ -1,13 +1,6 @@
 [versions]
-kotlin = "1.8.21"
-agp = "7.4.1"
-compose = "1.4.0"
+kotlin = "1.9.10"
 [libraries]
 gradlePlugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 [plugins]
-gradle-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-gradle-mulipatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 gradle-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-gradle-compose = { id = "org.jetbrains.compose", version.ref = "compose" }
-gradle-agp-application = { id = "com.android.application", version.ref = "agp" }
-gradle-agp-library = { id = "com.android.library", version.ref = "agp" }
