@@ -17,15 +17,18 @@ class Manager(override val coroutineContext: CoroutineContext) : CoroutineScope 
         launch {
             while (isActive) {
                 try {
-                    withTimeout(20000) {
+                    info("start")
+                    val data = withTimeout(20000) {
                         info("start query dns")
-                        val data = ApiManager.api.queryDns(zoneId)
-                        info("getData get data:${data.result.size}")
-                        check(data)
-                        info("job await")
-                        delay(waitClock.get())
-                        info("job await over")
+                        ApiManager.api.queryDns(zoneId)
                     }
+                    info("getData get data:${data.result.size}")
+                    withTimeout(20000) {
+                        check(data)
+                    }
+                    info("job await")
+                    delay(waitClock.get())
+                    info("job await over")
                 } catch (e: Exception) {
                     fail("error:${currentCoroutineContext()}", e)
                     waitClock.updateAndGet { (1000 * 60 * 60 * 4).toLong() } // 4小时
