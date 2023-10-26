@@ -9,8 +9,8 @@ const val auth = "INcySuoUTiho5Q6oUe6S31YK-SWYPGHVsmtozaoX"
 const val zoneId = "317274a38b4ce5ec01e3d4ab2a14e065"
 
 //const val accountId = "dcbcdb5062560841bbae35a53b3a9ea1"
-//const val changeDns = "www.home.zhaogege.top"
-const val changeDns = "www.test.home.zhaogege.top"
+const val changeDns = "www.home.zhaogege.top"
+//const val changeDns = "www.test.home.zhaogege.top"
 
 
 inline fun <reified T> T.getTag(): String =
