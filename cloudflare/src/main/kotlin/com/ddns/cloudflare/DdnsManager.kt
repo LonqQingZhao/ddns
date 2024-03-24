@@ -1,15 +1,13 @@
 package com.ddns.cloudflare
 
-import com.ddns.cloudflare.api.*
 import com.ddns.cloudflare.data.Response
 import kotlinx.coroutines.*
-import java.util.concurrent.Executors
-import java.util.concurrent.ThreadPoolExecutor
+import com.ddns.cloudflare.api.*
 import java.util.concurrent.atomic.AtomicLong
 import kotlin.coroutines.CoroutineContext
 
 
-class Manager(override val coroutineContext: CoroutineContext) : CoroutineScope {
+class DdnsManager(override val coroutineContext: CoroutineContext) : CoroutineScope {
 
     private val waitClock = AtomicLong(1000 * 5)
 

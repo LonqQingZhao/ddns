@@ -33,4 +33,10 @@ object Version {
         const val OKHTTP_LOG = "com.squareup.okhttp3:logging-interceptor:4.11.0"
     }
 
+    object Log {
+        const val LOG4J_CORE = "org.apache.logging.log4j:log4j-core:2.14.1"
+        const val LOG4J_API = "org.apache.logging.log4j:log4j-api:2.14.1"
+        const val LOG4J_IMPL = "org.apache.logging.log4j:log4j-slf4j-impl:2.14.1"
+    }
+
 }

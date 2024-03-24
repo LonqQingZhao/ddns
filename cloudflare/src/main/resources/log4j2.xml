@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG">
+    <Appenders>
+        <RollingFile name="RollingFile" fileName="/home/zhaolongqing/.program/ddns/cache/ddns.log"
+                     filePattern="/home/zhaolongqing/.program/ddns/cache/ddns-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB"/> <!-- 文件大小达到10MB时滚动 -->
+            </Policies>
+            <DefaultRolloverStrategy max="20"/> <!-- 最多保留20个备份文件 -->
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="RollingFile"/>
+        </Root>
+    </Loggers>
+</Configuration>

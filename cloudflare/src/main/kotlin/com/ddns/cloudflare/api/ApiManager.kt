@@ -8,7 +8,7 @@ object ApiManager {
 
     @JvmStatic
     val api: ServiceApi by lazy {
-               Retrofit.Builder()
+        Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .client(

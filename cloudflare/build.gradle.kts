@@ -19,4 +19,7 @@ dependencies {
     implementation(Version.Kotlin.COR_JVM)
     implementation(Version.Http.RETROFIT)
     implementation(Version.Http.RETROFIT_GSON)
+    implementation(Version.Log.LOG4J_API)
+    implementation(Version.Log.LOG4J_CORE)
+    implementation(Version.Log.LOG4J_IMPL)
 }
