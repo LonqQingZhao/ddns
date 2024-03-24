@@ -15,24 +15,27 @@ class DdnsManager(override val coroutineContext: CoroutineContext) : CoroutineSc
         launch {
             while (isActive) {
                 try {
-                    info("start")
+                    info("开始进程")
+
+                    info("任务等待")
+                    delay(waitClock.get())
+                    info("任务等待结束")
+
                     val data = withTimeout(20000) {
-                        info("start query dns")
+                        info("开始查询ddns")
                         ApiManager.api.queryDns(zoneId)
                     }
-                    info("getData get data:${data.result.size}")
+                    info("获取到ddns数据:${data.result.size}")
                     withTimeout(20000) {
                         check(data)
                     }
-                    info("job await")
-                    delay(waitClock.get())
-                    info("job await over")
+
                 } catch (e: Exception) {
-                    fail("error:${currentCoroutineContext()}", e)
-                    waitClock.updateAndGet { (1000 * 60 * 60 * 4).toLong() } // 4小时
+                    fail("ddns异常:${currentCoroutineContext()}", e)
+                    waitClock.updateAndGet { (1000 * 60 * 5).toLong() } // 5分钟
                     delay(waitClock.get())
                 }
-                info("job all over")
+                info("任务执行完成一轮")
             }
         }
     }
@@ -41,20 +44,20 @@ class DdnsManager(override val coroutineContext: CoroutineContext) : CoroutineSc
         if (data.success) {
             val result = data.result.find { it.name == changeDns }
             val ipResult = ApiManager.api.queryIP()
-            info("api data:${ipResult.data}")
+            info("查询到当前ip:${ipResult.data}")
             if (!ipResult.data.isNullOrEmpty() && ipResult.data != result?.content && result != null) {
-                info("change ip:${ipResult.data}")
+                info("修改域名:${ipResult.data}")
                 val r = ApiManager.api.updateIP(zoneId, result.id!!, result.copy(content = ipResult.data))
                 if (r.success) {
-                    info("change success")
+                    info("修改成功")
                     waitClock.getAndSet(1000 * 60 * 60 * 5) // 5小时
                 } else {
-                    info("change error")
+                    info("修改失败")
                     waitClock.getAndSet(1000 * 60 * 5) // 5分钟
                 }
             } else {
-                info("needn't change")
-                waitClock.getAndSet(1000 * 60 * 60) // 1分钟
+                info("不需要修改")
+                waitClock.getAndSet(1000 * 60 * 60) // 1小时
             }
         }
 
