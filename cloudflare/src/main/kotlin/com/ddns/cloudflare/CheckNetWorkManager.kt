@@ -14,7 +14,7 @@ import kotlin.coroutines.CoroutineContext
 class CheckNetWorkManager(override val coroutineContext: CoroutineContext) : CoroutineScope {
 
     companion object {
-        private const val MINUTE = 1
+        private const val MINUTE = 60L
         private const val CHECK_TIME = 5L * MINUTE
         private const val CHECK_COUNT = 3L
         private const val REBOOT_DELAY_TIME = 5L * MINUTE
