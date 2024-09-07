@@ -1,6 +1,6 @@
 {
-  "name": "Example Token",
-  "symbol": "EXMPL",
+  "name": "ETA Dog Token",
+  "symbol": "EDG9",
   "description": "Example token from Solana Making a Token guide.",
   "image": "https://raw.githubusercontent.com/longqingzhao/ddns/dev/metadata.png"
 }
