@@ -2,5 +2,5 @@
   "name": "Example Token",
   "symbol": "EXMPL",
   "description": "Example token from Solana Making a Token guide.",
-  "image": "https://github.com/longqingzhao/ddns/blob/dev/metadata.png"
+  "image": "https://raw.githubusercontent.com/longqingzhao/ddns/dev/metadata.png"
 }
